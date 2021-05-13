@@ -7,8 +7,19 @@ export default function Home() {
   const [session, loading] = useSession()
   const login = session ? (
     <>
-      @{session.screen_name} <br />
+      <div>@{session.screen_name}</div>
+      <div>
+        oauth_token:{' '}
+        <span style={{ filter: 'blur(0.25em)' }}>{session.oauth_token}</span>
+      </div>
+      <div>
+        oauth_token_secret:{' '}
+        <span style={{ filter: 'blur(0.25em)' }}>
+          {session.oauth_token_secret}
+        </span>
+      </div>
       <Image src={session.user.image} width="400" height="400" />
+      <div>{session.user.image}</div>
       <button onClick={() => signOut()}>Sign out</button>
     </>
   ) : (
@@ -29,10 +40,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      
       <main className={styles.main}>
         {login}
-        loading: {loading.toString()}
+        {loading && 'loading...'}
       </main>
     </div>
   )
