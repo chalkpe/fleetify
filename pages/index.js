@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { useSession, signIn, signOut } from 'next-auth/client'
+import ProfileCanvas from '../components/ProfileCanvas'
 
 export default function Home() {
   const [session, loading] = useSession()
@@ -19,6 +20,7 @@ export default function Home() {
         </span>
       </div>
       <Image src={session.user.image} width="400" height="400" />
+      <ProfileCanvas url={session.user.image} />
       <div>{session.user.image}</div>
       <button onClick={() => signOut()}>Sign out</button>
     </>
