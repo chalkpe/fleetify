@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { useSession, signIn, signOut } from 'next-auth/client'
 
@@ -6,7 +7,8 @@ export default function Home() {
   const [session, loading] = useSession()
   const login = session ? (
     <>
-      Signed in as {JSON.stringify(session.user)} <br />
+      @{session.screen_name} <br />
+      <Image src={session.user.image} width="400" height="400" />
       <button onClick={() => signOut()}>Sign out</button>
     </>
   ) : (
