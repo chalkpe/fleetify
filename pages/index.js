@@ -29,7 +29,7 @@ export default function Home() {
         image: dataURL.slice(dataURL.indexOf(',') + 1)
       })
       .then(() => alert('Done!'))
-      .catch((err) => alert(`Error: ${JSON.stringify(err?.response?.data)}`))
+      .catch((err) => alert(JSON.stringify(err?.response?.data, null, 2)))
       .finally(() => setLoading(false))
   }
 
