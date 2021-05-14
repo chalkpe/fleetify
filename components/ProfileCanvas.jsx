@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useMemo } from 'react'
 
-export default ({ url }) => {
+export default ({ url, color = '#00a3f9' }) => {
   const ref = useRef()
   const ctx = useMemo(() => ref.current?.getContext('2d'), [ref.current])
 
@@ -10,22 +10,33 @@ export default ({ url }) => {
     const img = new Image()
     img.src = url
     img.onload = () => {
-      const x = img.width / 2
-      const y = img.height / 2
-      const radius = img.width * 0.9 / 2
+      ctx.canvas.width = ctx.canvas.height = img.width
 
-      ctx.drawImage(img, 0, 0)
+      const big = 0.9
+      const small = 0.85
+
+      const xcenter = img.width / 2
+      const rbig = (img.width * big) / 2
+      const rsmall = (img.width * small) / 2
+      const xsmall = (img.width * (1 - small)) / 2
+
+      // border
+      ctx.fillStyle = color
+      ctx.fillRect(0, 0, img.width, img.width)
+
+      // margin w/ border and pic
       ctx.beginPath()
-      ctx.arc(x, y, radius, 0, 2 * Math.PI, false)
+      ctx.arc(xcenter, xcenter, rbig, 0, 2 * Math.PI, false)
       ctx.clip()
-      ctx.clearRect(
-        x - radius - 1,
-        y - radius - 1,
-        radius * 2 + 2,
-        radius * 2 + 2
-      )
-    }
-  }, [url, ref.current])
+      ctx.clearRect(0, 0, img.width, img.width)
 
-  return <canvas ref={ref} width={400} height={400} />
+      // scaled pic
+      ctx.beginPath()
+      ctx.arc(xcenter, xcenter, rsmall, 0, 2 * Math.PI, false)
+      ctx.clip()
+      ctx.drawImage(img, xsmall, xsmall, rsmall * 2, rsmall * 2)
+    }
+  }, [url, ctx, color])
+
+  return <canvas ref={ref} />
 }

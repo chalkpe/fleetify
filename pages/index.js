@@ -9,19 +9,10 @@ export default function Home() {
   const login = session ? (
     <>
       <div>@{session.screen_name}</div>
-      <div>
-        oauth_token:{' '}
-        <span style={{ filter: 'blur(0.25em)' }}>{session.oauth_token}</span>
-      </div>
-      <div>
-        oauth_token_secret:{' '}
-        <span style={{ filter: 'blur(0.25em)' }}>
-          {session.oauth_token_secret}
-        </span>
-      </div>
-      <Image src={session.user.image} width="400" height="400" />
+      <img src={session.user.image} />
       <ProfileCanvas url={session.user.image} />
       <div>{session.user.image}</div>
+      <button onClick={() => postImage()}>Update</button>
       <button onClick={() => signOut()}>Sign out</button>
     </>
   ) : (
