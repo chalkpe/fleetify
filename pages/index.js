@@ -142,7 +142,10 @@ export default function Home() {
           name="twitter:description"
           content="Make your Twitter profile pic look as if you have uploaded a fleet."
         />
-        <meta name="twitter:image" content="/fleetify.png" />
+        <meta
+          name="twitter:image"
+          content="https://fleetify.vercel.app/fleetify.png"
+        />
         <meta name="twitter:creator" content="@chalk_alt" />
       </Head>
 
