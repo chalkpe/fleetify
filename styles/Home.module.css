@@ -9,7 +9,7 @@
 }
 
 .container a {
-  color: #0070f3;
+  color: #00a3f9;
   text-decoration: none;
 }
 
@@ -19,6 +19,22 @@
   text-decoration: underline;
 }
 
+.container button {
+  font-size: 1.2rem;
+  text-align: center;
+  
+  color: #fff;
+  background-color: #00a3f9;
+  
+  margin: 0 0.5rem;
+  padding: 11px 18px;
+  border: none;
+  border-radius: 18rem;
+
+  cursor: pointer;
+  text-decoration: none;
+}
+
 .main {
   padding: 5rem 0;
   flex: 1;
@@ -26,6 +42,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.main > *:not(:first-child) {
+  margin-top: 2rem;
 }
 
 .footer {
@@ -43,33 +63,52 @@
 
 .title {
   font-size: 4rem;
+}
+
+.title, .description {
+  text-align: center;
   margin: 0 0 0.5rem 0;
 }
 
 .description {
-  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
-.images {
+.secondary {
+  color: #888;
+}
+
+.group {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
-  margin: 2rem;
 }
 
-.images span {
+.group span {
   margin: 2vmin;
   font-size: 5vmin;
 }
 
-.images img, .images canvas {
+.group img, .group canvas {
   width: 30vmin;
   height: 30vmin;
   padding: 0.5rem !important;
   border-radius: 50%;
 }
 
-.description {
-  font-size: 1.5rem;
-  line-height: 2rem;
+.picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.picker > * {
+  margin: 0 0.5rem;
+}
+
+.picker span {
+  text-decoration: underline;
 }

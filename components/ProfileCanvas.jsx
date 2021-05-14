@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useMemo } from 'react'
 
-const ProfileCanvas = ({ src, onChange, color = '#00a3f9' }) => {
+const ProfileCanvas = ({ src, onChange, color, ...props }) => {
   const ref = useRef()
   const ctx = useMemo(() => ref.current?.getContext('2d'), [ref.current])
 
@@ -47,7 +47,7 @@ const ProfileCanvas = ({ src, onChange, color = '#00a3f9' }) => {
     }
   }, [ref.current, src, color])
 
-  return <canvas ref={ref} />
+  return <canvas ref={ref} {...props} />
 }
 
 export default ProfileCanvas
