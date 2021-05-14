@@ -23,6 +23,10 @@ const ProfileCanvas = ({ src, onChange, color, ...props }) => {
 
       // border
       ctx.fillStyle = color
+      // ctx.fillRect(0, 0, size, size)
+      ctx.beginPath()
+      ctx.arc(center, center, center, 0, 2 * Math.PI, false)
+      ctx.clip()
       ctx.fillRect(0, 0, size, size)
 
       // margin w/ border and pic
@@ -43,9 +47,15 @@ const ProfileCanvas = ({ src, onChange, color, ...props }) => {
         smallRadius * 2
       )
 
-      if (typeof onChange === 'function') onChange(ctx.canvas.toDataURL())
+      if (typeof onChange === 'function') {
+        try {
+          onChange(ctx.canvas.toDataURL())
+        } catch (e) {
+          console.error(e)
+        }
+      }
     }
-  }, [ref.current, src, color])
+  }, [ref.current, ctx, src, color])
 
   return <canvas ref={ref} {...props} />
 }
