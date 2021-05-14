@@ -14,8 +14,9 @@ const ProfileCanvas = ({ src, onChange, color, ...props }) => {
       const size = Math.max(400, img.width)
       ctx.canvas.width = ctx.canvas.height = size
 
-      const big = 0.9
-      const small = 0.85
+      // see: https://twitter.com/64bitfox/status/1392760437448478721
+      const big = 0.9 // == 360 / 400
+      const small = 0.85 // == 340 / 400
 
       const center = size / 2
       const bigRadius = (size * big) / 2
@@ -24,7 +25,6 @@ const ProfileCanvas = ({ src, onChange, color, ...props }) => {
 
       // border
       ctx.fillStyle = color
-      // ctx.fillRect(0, 0, size, size)
       ctx.beginPath()
       ctx.arc(center, center, center, 0, 2 * Math.PI, false)
       ctx.clip()
