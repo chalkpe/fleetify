@@ -110,5 +110,6 @@
 }
 
 .picker span {
+  cursor: pointer;
   text-decoration: underline;
 }
