@@ -15,7 +15,7 @@ const ProfileCanvas = ({ src, onChange, color, ...props }) => {
       ctx.canvas.width = ctx.canvas.height = size
 
       const big = 0.9 // == 360 / 400
-      const small = 0.825 // == 330 / 400
+      const small = 0.8125 // == 325 / 400
 
       const center = size / 2
       const bigRadius = (size * big) / 2
