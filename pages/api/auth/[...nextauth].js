@@ -17,9 +17,7 @@ export default NextAuth({
     })
   ],
   callbacks: {
-    async jwt(token, user, account, profile, isNewUser) {
-      console.error(profile)
-
+    async jwt(token, _user, account, profile, _isNewUser) {
       copy(token, account, ['oauth_token', 'oauth_token_secret'])
       copy(token, profile, ['screen_name'])
       return token
