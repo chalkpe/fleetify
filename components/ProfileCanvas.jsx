@@ -8,6 +8,7 @@ const ProfileCanvas = ({ src, onChange, color, ...props }) => {
     if (!ctx) return
 
     const img = new Image()
+    img.crossOrigin = 'anonymous'
     img.src = src
     img.onload = () => {
       const size = Math.max(400, img.width)

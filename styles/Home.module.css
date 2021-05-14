@@ -35,6 +35,10 @@
   text-decoration: none;
 }
 
+.container button:disabled {
+  background-color: #7fd1fc;
+}
+
 .main {
   padding: 5rem 0;
   flex: 1;

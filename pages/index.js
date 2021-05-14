@@ -8,26 +8,30 @@ import { useSession, signIn, signOut } from 'next-auth/client'
 import ProfileCanvas from '../components/ProfileCanvas'
 
 export default function Home() {
-  const [session] = useSession()
+  const [session, sessionLoading] = useSession()
   const [dataURL, setDataURL] = useState()
   const [color, setColor] = useState('#00a3f9')
+  const [loading, setLoading] = useState(false)
 
   const src = useMemo(
     () =>
-      session?.user?.image ||
+      session?.user?.image?.replace(/_normal\.(jpg|png|gif)$/, '.$1') ||
       'https://pbs.twimg.com/profile_images/1354479643882004483/Btnfm47p_400x400.jpg',
     [session]
   )
 
-  const postImage = () =>
+  const postImage = () => {
+    setLoading(true)
     axios
       .post('/api/update', {
         oauth_token: session.oauth_token,
         oauth_token_secret: session.oauth_token_secret,
         image: dataURL.slice(dataURL.indexOf(',') + 1)
       })
-      .then(() => alert('done!'))
-      .catch((err) => alert(`error: ${JSON.stringify(err?.response?.data)}`))
+      .then(() => alert('Done!'))
+      .catch((err) => alert(`Error: ${JSON.stringify(err?.response?.data)}`))
+      .finally(() => setLoading(false))
+  }
 
   const login = session ? (
     <div>
@@ -45,13 +49,19 @@ export default function Home() {
         <span onClick={() => setColor('#745deb')}>Space</span>
       </div>
       <nav className={styles.group}>
-        <button onClick={() => postImage()}>Fleetify my profile pic!</button>
-        <button onClick={() => signOut()}>Sign out</button>
+        <button disabled={loading} onClick={() => postImage()}>
+          Fleetify my profile pic! {loading && ' (applying...)'}
+        </button>
+        <button disabled={sessionLoading} onClick={() => signOut()}>
+          Sign out
+        </button>
       </nav>
     </div>
   ) : (
     <div>
-      <button onClick={() => signIn('twitter')}>Sign in with Twitter</button>
+      <button disabled={sessionLoading} onClick={() => signIn('twitter')}>
+        Sign in with Twitter
+      </button>
     </div>
   )
 
